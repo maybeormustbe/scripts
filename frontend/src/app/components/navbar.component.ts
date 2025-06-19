@@ -31,15 +31,13 @@ import { User } from '../models/user.model';
             <li class="nav-item" *ngIf="!currentUser">
               <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>
             </li>
-            <li class="nav-item dropdown" *ngIf="currentUser">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
-                {{ currentUser.first_name }} {{ currentUser.last_name }}
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#" (click)="logout($event)">Logout</a></li>
-              </ul>
+            <li class="nav-item" *ngIf="currentUser">
+              <span class="navbar-text me-3">
+                Welcome, {{ currentUser.first_name }} {{ currentUser.last_name }}
+              </span>
+            </li>
+            <li class="nav-item" *ngIf="currentUser">
+              <a class="nav-link" href="#" (click)="logout($event)">Logout</a>
             </li>
           </ul>
         </div>
