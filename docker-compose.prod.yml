@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - SECRET_KEY=${SECRET_KEY:-production-secret-key-change-me}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-production-jwt-secret-change-me}
+      - DATABASE_URL=sqlite:///app.db
+    volumes:
+      - backend_data:/app/instance
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  backend_data:
