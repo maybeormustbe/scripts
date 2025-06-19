@@ -64,12 +64,15 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "flask-angular-app:build:development"
+          },
           "configurations": {
             "production": {
-              "buildTarget": "flask-angular-app:build:production"
+              "browserTarget": "flask-angular-app:build:production"
             },
             "development": {
-              "buildTarget": "flask-angular-app:build:development"
+              "browserTarget": "flask-angular-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -101,5 +104,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

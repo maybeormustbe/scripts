@@ -70,7 +70,7 @@ def register():
         db.session.add(user)
         db.session.commit()
 
-        access_token = create_access_token(identity=user.id)
+        access_token = create_access_token(identity=str(user.id))
 
         return jsonify({
             'message': 'User registered successfully',
@@ -98,7 +98,7 @@ def login():
         if not user.is_active:
             return jsonify({'error': 'Account is deactivated'}), 401
 
-        access_token = create_access_token(identity=user.id)
+        access_token = create_access_token(identity=str(user.id))
 
         return jsonify({
             'message': 'Login successful',
@@ -114,7 +114,7 @@ def login():
 def get_profile():
     try:
         user_id = get_jwt_identity()
-        user = User.query.get(user_id)
+        user = User.query.get(int(user_id))
         
         if not user:
             return jsonify({'error': 'User not found'}), 404
